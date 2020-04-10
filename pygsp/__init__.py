@@ -17,20 +17,14 @@ Moreover, the following modules provide additional functionality:
 
 """
 
-from pygsp import utils as _utils
-
-__all__ = [
-    'graphs',
-    'filters',
-    'plotting',
-    'reduction',
-    'features',
-    'learning',
-    'optimization',
-    'utils',
-]
-
-_utils.import_modules(__all__[::-1], 'pygsp', 'pygsp')
+from pygsp import graphs  # noqa: F401
+from pygsp import filters  # noqa: F401
+from pygsp import plotting  # noqa: F401
+from pygsp import reduction  # noqa: F401
+from pygsp import features  # noqa: F401
+from pygsp import learning  # noqa: F401
+from pygsp import optimization  # noqa: F401
+from pygsp import utils  # noqa: F401
 
 # Users only call the plot methods from the objects.
 # It's thus more convenient for them to have the doc there.
