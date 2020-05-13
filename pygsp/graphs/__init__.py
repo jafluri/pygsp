@@ -165,6 +165,7 @@ Generated graphs
     RandomRegular
     RandomRing
     Ring
+    Star
     StochasticBlockModel
     SwissRoll
     Torus
@@ -205,6 +206,7 @@ _GRAPHS = [
     'RandomRegular',
     'RandomRing',
     'Ring',
+    'Star',
     'StochasticBlockModel',
     'SwissRoll',
     'Torus'
