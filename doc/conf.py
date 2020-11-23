@@ -20,7 +20,7 @@ autodoc_default_options = {
 extensions.append('sphinx.ext.intersphinx')
 intersphinx_mapping = {
     'python': ('https://docs.python.org/3', None),
-    'numpy': ('https://numpy.org/doc/stable/', None),
+    'numpy': ('https://numpy.org/doc/stable', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/reference', None),
     'matplotlib': ('https://matplotlib.org', None),
     'pyunlocbox': ('https://pyunlocbox.readthedocs.io/en/stable', None),
@@ -55,6 +55,9 @@ sphinx_gallery_conf = {
     'doc_module': 'pygsp',
     'show_memory': True,
 }
+
+extensions.append('sphinx_copybutton')
+copybutton_prompt_text = ">>> "
 
 exclude_patterns = ['_build']
 source_suffix = '.rst'
