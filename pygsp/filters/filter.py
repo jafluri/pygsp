@@ -724,8 +724,9 @@ class Filter(object):
         >>> x = np.random.RandomState(42).normal(size=G.N)
         >>> y = g.filter(x, method='exact')
         >>> z = h.filter(y, method='exact')
-        >>> print('error: {:.0e}'.format(np.linalg.norm(x - z)))
-        error: 3e-14
+        >>> # The error is close to machine precision
+        >>> # print('error: {:.0e}'.format(np.linalg.norm(x - z)))
+        >>> assert(np.linalg.norm(x - z)<1e-13)
         >>> # Indeed, they cancel each others' effect.
         >>> Ag, Bg = g.estimate_frame_bounds()
         >>> Ah, Bh = h.estimate_frame_bounds()

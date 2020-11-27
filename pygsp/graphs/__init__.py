@@ -205,7 +205,6 @@ from .ring import Ring  # noqa: F401
 from .stochasticblockmodel import StochasticBlockModel  # noqa: F401
 from .swissroll import SwissRoll  # noqa: F401
 from .torus import Torus  # noqa: F401
-
 from .nngraphs.nngraph import NNGraph  # noqa: F401
 from .nngraphs.bunny import Bunny  # noqa: F401
 from .nngraphs.cube import Cube  # noqa: F401
@@ -214,3 +213,7 @@ from .nngraphs.grid2dimgpatches import Grid2dImgPatches  # noqa: F401
 from .nngraphs.sensor import Sensor  # noqa: F401
 from .nngraphs.sphere import Sphere  # noqa: F401
 from .nngraphs.twomoons import TwoMoons  # noqa: F401
+
+
+# Hack: make a list of all graphs
+__all__ = [e for e in dir() if e[0].isupper()]
