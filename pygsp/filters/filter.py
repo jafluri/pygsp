@@ -725,7 +725,7 @@ class Filter(object):
         >>> y = g.filter(x, method='exact')
         >>> z = h.filter(y, method='exact')
         >>> print('error: {:.0e}'.format(np.linalg.norm(x - z)))
-        error: 4e-14
+        error: 3e-14
         >>> # Indeed, they cancel each others' effect.
         >>> Ag, Bg = g.estimate_frame_bounds()
         >>> Ah, Bh = h.estimate_frame_bounds()
