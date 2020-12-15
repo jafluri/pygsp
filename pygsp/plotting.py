@@ -266,7 +266,7 @@ def _plt_plot_filter(filters, n, eigenvalues, sum, ax, **kwargs):
         # artifacts, for example when deltas are centered on the eigenvalues.
         x = np.sort(np.concatenate([x, filters.G.e]))
 
-    y = filters.evaluate(x).T
+    y = filters.evaluate(x).reshape((-1, n)).T
     lines = ax.plot(x, y, **params)
 
     # TODO: plot highlighted eigenvalues

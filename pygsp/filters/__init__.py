@@ -18,10 +18,9 @@ The :class:`Filter` base class implements a common interface to all filters:
     Filter.filter
     Filter.analyze
     Filter.synthesize
-    Filter.complement
-    Filter.inverse
     Filter.compute_frame
     Filter.estimate_frame_bounds
+    Filter.approximate
     Filter.plot
     Filter.localize
 
@@ -30,32 +29,19 @@ Filters
 
 Then, derived classes implement various common graph filters.
 
-**Filters that solve differential equations**
-
-The following filters solve partial differential equations (PDEs) on graphs,
-which model processes such as heat diffusion or wave propagation.
+**Filter banks of N filters**
 
 .. autosummary::
 
-    Heat
-    Wave
+    Abspline
+    Gabor
+    HalfCosine
+    Itersine
+    MexicanHat
+    Meyer
+    SimpleTight
 
-**Low-pass filters**
-
-.. autosummary::
-
-    Heat
-
-**Band-pass filters**
-
-These filters can be configured to be low-pass, high-pass, or band-pass.
-
-.. autosummary::
-
-    Expwin
-    Rectangular
-
-**Filter banks of two filters: a low-pass and a high-pass**
+**Filter banks of 2 filters: a low pass and a high pass**
 
 .. autosummary::
 
@@ -64,27 +50,20 @@ These filters can be configured to be low-pass, high-pass, or band-pass.
     Simoncelli
     Papadakis
 
-**Filter banks composed of dilated or translated filters**
+**Low pass filters**
 
 .. autosummary::
 
-    Abspline
-    HalfCosine
-    Itersine
-    MexicanHat
-    Meyer
-    SimpleTight
+    Heat
+    Expwin
+    Rectangular
 
-**Filter banks for vertex-frequency analyzes**
-
-Those filter banks are composed of shifted versions of a mother filter, one per
-graph frequency (Laplacian eigenvalue). They can analyze frequency content
-locally, as a windowed graph Fourier transform.
+**Band pass filters**
 
 .. autosummary::
 
-    Gabor
-    Modulation
+    Expwin
+    Rectangular
 
 Approximations
 --------------
@@ -96,6 +75,10 @@ Fourier basis, is quadratic with the number of nodes (without taking into
 account the cost of the necessary eigendecomposition of the graph Laplacian).
 
 **Chebyshev polynomials**
+
+.. autosummary::
+
+    Chebyshev
 
 .. autosummary::
 
@@ -126,13 +109,11 @@ _FILTERS = [
     'Itersine',
     'MexicanHat',
     'Meyer',
-    'Modulation',
     'Papadakis',
     'Rectangular',
     'Regular',
     'Simoncelli',
     'SimpleTight',
-    'Wave',
 ]
 _APPROXIMATIONS = [
     'compute_cheby_coeff',
@@ -143,7 +124,9 @@ _APPROXIMATIONS = [
     'lanczos_op'
 ]
 
-__all__ = _FILTERS + _APPROXIMATIONS
+__all__ = _FILTERS + _APPROXIMATIONS + ['Chebyshev']
 
 _utils.import_classes(_FILTERS, 'filters', 'filters')
-_utils.import_functions(_APPROXIMATIONS, 'filters.approximations', 'filters')
+_utils.import_functions(_APPROXIMATIONS, 'filters.approximations_old', 'filters')
+
+from .approximations import *

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import division
-
 import numpy as np
 
 from . import Filter  # prevent circular import in Python < 3.5
@@ -42,8 +40,8 @@ class Held(Filter):
     >>> g = filters.Held(G)
     >>> s = g.localize(G.N // 2)
     >>> fig, axes = plt.subplots(1, 2)
-    >>> _ = g.plot(ax=axes[0])
-    >>> _ = G.plot(s, ax=axes[1])
+    >>> g.plot(ax=axes[0])
+    >>> G.plot_signal(s, ax=axes[1])
 
     """
 
@@ -51,27 +49,27 @@ class Held(Filter):
 
         self.a = a
 
-        def kernel(x, a):
-            y = np.empty(np.shape(x))
+        kernels = [lambda x: held(x * (2./G.lmax), a)]
+        def dual(x):
+            y = held(x * (2./G.lmax), a)
+            return np.real(np.sqrt(1 - y**2))
+        kernels.append(dual)
+
+        def held(val, a):
+            y = np.empty(np.shape(val))
             l1 = a
             l2 = 2 * a
+            mu = lambda x: -1. + 24.*x - 144.*x**2 + 256*x**3
 
-            r1ind = (x >= 0) * (x < l1)
-            r2ind = (x >= l1) * (x < l2)
-            r3ind = (x >= l2)
-
-            def mu(x):
-                return -1 + 24*x - 144*x**2 + 256*x**3
+            r1ind = (val >= 0) * (val < l1)
+            r2ind = (val >= l1) * (val < l2)
+            r3ind = (val >= l2)
 
             y[r1ind] = 1
-            y[r2ind] = np.sin(2 * np.pi * mu(x[r2ind] / 8 / a))
+            y[r2ind] = np.sin(2*np.pi*mu(val[r2ind]/(8.*a)))
             y[r3ind] = 0
 
             return y
-
-        held = Filter(G, lambda x: kernel(x*2/G.lmax, a))
-        complement = held.complement(frame_bound=1)
-        kernels = held._kernels + complement._kernels
 
         super(Held, self).__init__(G, kernels)
 

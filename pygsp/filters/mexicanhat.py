@@ -32,7 +32,7 @@ class MexicanHat(Filter):
     lpfactor : float
         Low-pass factor. lmin=lmax/lpfactor will be used to determine scales.
         The scaling function will be created to fill the low-pass gap.
-    scales : array_like
+    scales : array-like
         Scales to be used.
         By default, initialized with :func:`pygsp.utils.compute_log_scales`.
     normalize : bool
@@ -50,8 +50,8 @@ class MexicanHat(Filter):
     >>> g = filters.MexicanHat(G)
     >>> s = g.localize(G.N // 2)
     >>> fig, axes = plt.subplots(1, 2)
-    >>> _ = g.plot(ax=axes[0])
-    >>> _ = G.plot(s, ax=axes[1])
+    >>> g.plot(ax=axes[0])
+    >>> G.plot_signal(s, ax=axes[1])
 
     """
 
